@@ -1,0 +1,415 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Last words</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src='d3-tip.js'></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="d3-tip.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+    <div id="tooltip"></div>
+
+    <div class="container">
+
+      <div class="row" id="row-title">
+        <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6">
+          <h1 id="title">
+              What they said before being executed.
+          </h1>
+        </div>
+      </div>
+
+        <div class"row">
+          <div class="col-sm-12 line">
+            <hr id='line-intro' style="color:white; background-color:white; height:1px; border:none; width:200px">
+          </div>
+        </div>
+
+        <div class"row">
+          <div class="col-sm-12 line">
+            <p class="author"><em>By <a target="blank" href="https://twitter.com/mariepastora">@mariepastora</a> - Best on Chrome and desktop</em></p>
+          </div>
+        </div>
+
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6" id="intro_paragraph">
+                    <p> In the United States, capital punishment is legal in 31 states. In 1976, after a four-year ban, the Supreme Court issued a ruling re-instating the death penalty in <em>Gregg v Georgia</em>. 1,479 inmates have been executed since then.</p>
+                </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="row">
+                <div class="offset-md-2 col-sm-8 col-lg-8 col-md-8">
+                    <div style="text-align:center" id="chart-executions"></div>
+                </div>
+        </div>
+        <br>
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p> Texas has carried out most of these executions, putting to death 553 inmates. <a href="https://apps.texastribune.org/death-row/"> The state has the most active execution chamber in the country, </a>and 225 convicts currently sit on its death rows.</p>
+                </div>
+        </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p> Before they are executed, inmates can make a last statement. Some speak, others write and many decline, but we managed to retrieve 939 last statements, either in their entirety, or pieces of them.</p>
+                </div>
+        </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p> Accross all states, years, races and genders, 397 inmates mentionned love. 294 mentionned a family, either theirs or the one of the person they killed.</p>
+                </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="row">
+                <div class="offset-md-2 col-sm-8 col-lg-8 col-md-8">
+                    <div style="text-align:center" id="chart-words"></div>
+                </div>
+        </div>
+
+          <br>
+          <br>
+          <br>
+          
+          <div class="col-sm-12 line">
+            <hr id='line-intro' style="color:white; background-color:white; height:1px; border:none; width:200px">
+          </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p style="text-align:center">Let's take a better look. </p>
+                </div>
+        </div>
+
+        <br>
+          <div class="col-sm-12 line">
+            <hr id='line-intro' style="color:white; background-color:white; height:1px; border:none; width:200px">
+          </div>
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p style="text-align:center; font-size:15px">
+                        <span class="dot" style="background-color:#A5A447"> </span> White  
+                        <span class="dot" style="background-color:#E9B230"> </span> Black
+                        <span class="dot" style="background-color:#e3d0be"> </span> Asian 
+                        <span class="dot" style="background-color:#CA3D77"> </span> Native American  
+                        <span class="dot" style="background-color:#E2617F"> </span> Hispanic 
+                        <span class="dot" style="background-color:grey"> </span> Other 
+                    </p>
+                </div>
+        </div>
+          <br>
+
+        <div class="row">
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="step" id="first-step">
+                <p>These are the 16 female inmates that have been executed since 1976. Half of them left a last statement, either spoken or written. </p>
+            </div>
+
+            <div class="step" id="second-step">
+                <p>And these statements mostly mentionned love.</p>
+            </div>
+
+            <div class="step" id="third-step">
+                <p><b>Teresa Bean Lewis</b> was convicted in 2002 for the murders of her husband, and of her stepson. She was executed in Virginia, in September 2010. Her final words went to Kathy, the daughter of the husband she killed: <br><br><em>"I just want Kathy to know that I love her, and I'm very sorry."</span></em></p>
+            </div>
+
+            <div class="step" id="fourth-step">
+                <p><b>Lisa Ann Coleman</b> was sentenced to death for the murder of her partner's son in July 2004. She was executed in Texas, in 2006:<br><br><em>"I just want to tell my family I love them; my son, I love him. The girls on the row, I love them and keep their heads up. Tell Darlie I love her, hand in hand. God bless y'all. I'm alright. Tell them I finished strong. I love y'all. I'm done. I love you, Richie. I love you. Thank you, Brad and John, all of y'all. God is good. I love you, Auntie. I'm done."</em></p>
+            </div>
+
+            <div class="step" id="fifth-step">
+                <p>And four mentionned God.</p>
+            </div>
+
+            <div class="step" id="sixth-step">
+                <p><b>Kimberley Lagayle McCarthy</b> was convicted for the 1997 murder of her neighbor. She was executed in 2013, in Texas.<br><br> <em>"This is not a loss. This is a win. You know where I'm going. I'm going home to be with Jesus. Keep the faith. I love you all. God is great."</em></p>
+            </div>
+
+          </div>
+          <div class="col-sm-8 col-md-8 col-lg-8 graphic sticky">
+            <div id="female-inmates"></div>
+          </div>
+      </div>
+
+          <br>
+          <br>
+          <br>
+          
+          <div class="col-sm-12 line">
+            <hr id='line-intro' style="color:white; background-color:white; height:1px; border:none; width:200px">
+          </div>
+
+          <br>
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p style="text-align:center">Now let's talk about race.</p>
+                </div>
+        </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p>506 African American inmates have been executed since 1976. This represents 34% of all the executions. However, non-Hispanic Blacks represent 13.7% of the country's total population, according to the<a href="https://www.census.gov/quickfacts/fact/table/US/PST045217"> Census Bureau's 2017 estimates.</a></p>
+                </div>
+        </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p>In other words, Black defendants<a href="https://www.gao.gov/products/GGD-90-57"> are more likely</a> to receive the death penalty than White defendants. This is especially true if the victim of the Black defendant is white.</p>
+                </div>
+        </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p>We could retrieve the final statements of 316 of them. </p>
+                </div>
+        </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p>149 mentionned love. 108 mentionned family. 59 mentionned God. And 45 pronounced the word "Peace".</p>
+                </div>
+        </div>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p>Let's see what it represents.</p>
+                </div>
+        </div>
+          <br>
+          <br>
+          <div class="col-sm-12 line">
+            <hr id='line-intro' style="color:white; background-color:white; height:1px; border:none; width:200px">
+          </div>
+          <br>
+          <br>
+
+
+        <div class="row">
+
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="step" id="seventh-step">
+                <p>Here are all the 506 African American inmates who were executed.</p>
+            </div>
+
+            <div class="step" id="eighth-step">
+                <p>A lot of them talked about love.</p>
+            </div>
+
+            <div class="step" id="ninth-step">
+                <p><em>"This is justified. I love you. I'll see you again." </em><br><br><b> - Anthony Rozelle Banks</b>, executed in Oklahoma, in September 2013 a murder committed in 1978.</p>
+            </div>
+
+            <div class="step" id="tenth-step">
+                <p><em>"I send love to my family and friends and everyone who knows me." </em><br><br><b> - Johnile L. Dubois</b>, executed in Virginia in 1998, for the 1991 murder of one person. Four death penalty protesters lit candles outside of the prison during his execution.</p>
+            </div>
+
+            <div class="step" id="eleventh-step">
+                <p><em>"Bohannon, Peg and Kim, I love ya'll. Son, get your life right with Christ, also your mother. Give mom a hug for me and tell her that I love her. Ya'll do understand that I came here a sinner and leaving a saint. Take me home Jesus, take me home Lord, take me home Lord. I ain't left yet, must be a miracle. I am a miracle. I see you, Rich. Don't cry son, don't cry baby. I love ya'll. I'm ready. </em><br><br><b> - Marvin Lee Wilson</b>, executed in Texas in August 2012, for the murder of one person in 1992.</p>
+            </div>
+
+          </div>
+
+          <div class="col-sm-8 col-md-8 col-lg-8 graphic sticky">
+            <div id="african-american-inmates"></div>
+          </div>
+
+        </div>
+
+        <br>
+        <br>
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p>Out of these inmates, a handful chose their last statement to be about about being Black in America</p>
+                </div>
+        </div>
+
+
+        <br>
+        <br>
+
+
+        <div class="row">
+            <div class="offset-md-1 col-sm-10 col-md-10 col-lg-10 graphic sticky">
+                <div id="race-issues"></div>
+            </div>
+
+            <div class="offset-md-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="step end" id="twelth-step">
+                <p style="text-align:center">There are only six of them.</p>
+            </div>
+
+            <div class="step end" id="thirteenth-step">
+                <p><em>"Being born black in America was against me."</em><br><br> - <b>John C. Young</b>, executed in Georgia in 1985</p>
+            </div>
+
+            <div class="step end" id="fourteenth-step">
+                <p><em>"They told the other two guys to put it on me. I think it's wrong. I swear to God I did not kill him." "You provided no defense. I didn't have no defense, and that's why I'm here." "My name is Luther Jerome Williams. I ain't no black, little rat."</em><br><br> - <b> Luther Jerome Williams</b>, executed in Alabama in 2007.</p>
+            </div>
+
+            <div class="step end" id="fifteenth-step">
+              <p><em>"...I would like to say that I did not kill Bobby Lambert. That I'm an innocent black man that is being murdered. This is a lynching that is happening in America tonight." "
+                  This is the part of the genocide, this is part of the African (unintelligible), that we as black people have endured in America. But we shall overcome, we will continue with this. We will continue, we will gain our freedom and liberation, by any means necessary. Stay strong. They cannot kill us. We will move forward."</em> <br><br> - <b> Gary Lee Graham</b>, executed in Texas, in June 2000.</p>
+            </div>
+
+
+            <div class="step end" id="sixteenth-step">
+                <p><em>"This execution is not justice. This execution is an act of revenge! If this is justice, then justice is blind..."</em> <br><br> - <b> Richard James Wilkerson</b>, executed in Texas in 1993 for murdering four people in 1983. His sister wrote a last statement in his name.</p>
+            </div>
+
+            <div class="step end" id="seventeenth-step">
+                <p><em>"I'm an African warrior, born to breathe, and born to die." - </em> <br><br> - <b>Carl Eugene Kelly</b>, executed in Texas in 1993.</p>
+            </div>
+
+
+            <div class="step end" id="eighteenth-step">
+                <p><em>"I just say in this case the State of Texas made a big mistake,", "It doesn't do any good to have a lawyer. Fifty percent of the cases go before the Court of Criminal Appeals. They only hear the white ones. May the grace of God have mercy on them."</em> <br><br> - <b> Bernard Eugene Amos</b>, executed in Texas for murdering one person in 1988.
+                </p>
+            </div>
+
+
+            </div>
+        </div>
+
+       <br>
+        <br>
+
+        <div class"row">
+          <div class="col-sm-12 line">
+            <hr id='line-intro' style="color:white; background-color:white; height:1px; border:none; width:200px">
+          </div>
+        </div>
+
+        <br>
+
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p>Now, see it for yourself. </p>
+                </div>
+        </div>
+
+
+        <div class='row'>
+            <div class= 'col-12 col-md-12' style="text-align:center">
+                <input class="form-control" type="text" name="year" placeholder=" Enter a word" style="width:215px; align:center; margin-left:40%; text-align:center">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class= 'col-12 col-md-12' style="text-align:center">
+                <input class="btn btn-light" type='button' value='Find out' onclick='displayInfo();'>
+            </div>
+        </div>
+        <div class"row">
+                <div class="offset-md-3 col-sm-6 col-lg-6 col-md-6 text_paragraphs">
+                    <p style="text-align:center; font-size:15px">
+                        <span class="dot" style="background-color:#A5A447"> </span> White  
+                        <span class="dot" style="background-color:#E9B230"> </span> Black
+                        <span class="dot" style="background-color:#e3d0be"> </span> Asian 
+                        <span class="dot" style="background-color:#CA3D77"> </span> Native American  
+                        <span class="dot" style="background-color:#E2617F"> </span> Hispanic 
+                        <span class="dot" style="background-color:grey"> </span> Other 
+                    </p>
+                </div>
+        </div>
+        <br>
+        <br>
+
+
+        <div class='row'>
+          <div class="col-sm-4 col-lg-4 col-md-4">
+                <p id="info-person"></p>
+            </div>
+
+            <div class= 'col-md-8 col-lg-8 col-sm-8'>
+                <div id="search-final"></div>
+            </div>
+
+        </div>
+
+        <div class"row">
+          <div class="col-sm-12 line">
+            <hr id='line-intro' style="color:white; background-color:white; height:1px; border:none; width:200px">
+          </div>
+        </div>
+
+
+        <div class"row">
+                <div class="col-sm-12 col-lg-12 col-md-12 text_paragraphs">
+                    <p class="notes" style="opacity:0.7; font-size:14px">The data was retrieved from <a href="http://murderpedia.org/">murdrepedia.org</a>. When last statements couldn't be found, they were manually retrieved. All information regarding executions conducted since 2014 could not be found on murderopedia, and were retrieved from <a href="https://deathpenaltyinfo.org/views-executions">deathpenaltyinfo.org</a>. Last statements from these executions were found in local newspapers. Code is available on <a href= "https://github.com/mariepastora"> GitHub</a>, and so is the dataset.</p>
+                </div>
+        </div>
+        <br>
+        <br>
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+   
+
+
+
+ <!-- include our scrolling library -->
+    <script src='https://unpkg.com/intersection-observer'></script>
+    <script src='https://unpkg.com/scrollama'></script>
+    <script src='stickyfill.min.js'></script>
+
+    <script>
+      /* Allow position: sticky to work in old browsers */
+      var elements = document.querySelectorAll('.sticky');
+      Stickyfill.add(elements);
+
+      // instantiate the scrollama
+      var scroller = scrollama();
+
+      scroller
+        .setup({
+          // IF YOU CHANGE THIS CHANGE THE .sticky CSS
+          offset: 0.30, // how far from the top?
+          step: '.step', // class for stepping through
+          debug: false, // shows the line
+          container: 'container'
+        })
+        .onStepEnter(function(response) {
+          // trigger the stepin event
+          d3.select(response.element).dispatch('stepin')
+          d3.select(response.element).classed('active', true)
+        })
+        .onStepExit(function(response) {
+          // trigger the stepout event
+          d3.select(response.element).dispatch('stepout')
+          d3.select(response.element).classed('active', false)
+        })
+    </script>
+    <script src='chart.js'></script>
+    <script src='chart-words.js'></script>
+    <script src='trying.js'></script>
+    <script src='african-american.js'></script>
+    <script src='race-issues.js'></script>
+    <script src='final-search.js'></script>
+
+</body>
+
+</html>
+
+
+
